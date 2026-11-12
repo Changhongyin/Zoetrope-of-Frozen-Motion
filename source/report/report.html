@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>走马灯 · 项目报告</title>
+<style>
+  @page { size: 297mm 167mm; margin: 0; }
+  :root { --ink:#0d0706; --paper:#f4e6c8; --gold:#d9a441; --red:#b3261e; --dim:#b9a98a; --serif:"Songti SC","STSong","SimSun","Noto Serif SC",serif; --sans:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--ink); color: var(--paper); font-family: var(--sans); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  section { width: 297mm; height: 167mm; padding: 13mm 16mm 11mm; position: relative; overflow: hidden; page-break-after: always; background: var(--ink); display: flex; flex-direction: column; }
+  section:last-child { page-break-after: auto; }
+  h1 { font-family: var(--serif); font-size: 15mm; margin: 0; letter-spacing: .12em; }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: 7.4mm; margin: 0 0 5mm; letter-spacing: .1em; color: var(--gold); }
+  h2 small { font-family: var(--sans); font-size: 3.2mm; color: var(--dim); letter-spacing: .08em; margin-left: 4mm; }
+  h3 { font-size: 3.9mm; margin: 0 0 1.5mm; color: var(--gold); font-weight: 600; letter-spacing: .05em; }
+  p, li, td, th { font-size: 3.45mm; line-height: 1.68; margin: 0; }
+  p + p { margin-top: 2mm; }
+  ul { margin: 0; padding-left: 5mm; }
+  .dim { color: var(--dim); }
+  .pg { position: absolute; right: 16mm; bottom: 6mm; font-size: 2.8mm; color: var(--dim); letter-spacing: .15em; }
+  .row { display: flex; gap: 7mm; flex: 1; min-height: 0; }
+  .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4mm; }
+  figure { margin: 0; display: flex; flex-direction: column; min-height: 0; }
+  figure img { width: 100%; display: block; border-radius: 1.2mm; border: .25mm solid rgba(217,164,65,.35); object-fit: cover; min-height: 0; }
+  figcaption { font-size: 2.9mm; color: var(--dim); margin-top: 1.4mm; line-height: 1.5; }
+  .tag { display: inline-block; font-size: 2.7mm; padding: .5mm 2.4mm; border: .25mm solid var(--gold); color: var(--gold); border-radius: 4mm; letter-spacing: .1em; margin-right: 1.5mm; }
+  .before { border-color: #8a7a62 !important; color: #b9a98a !important; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; padding: 1.3mm 2.4mm; border-bottom: .2mm solid rgba(244,230,200,.16); font-size: 3.15mm; }
+  th { color: var(--gold); font-weight: 600; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+  code { font-family: Consolas, monospace; font-size: 2.95mm; color: #ffd58a; }
+  .card { background: rgba(244,230,200,.055); border: .25mm solid rgba(217,164,65,.28); border-radius: 1.6mm; padding: 4mm 5mm; }
+  .big { font-family: var(--serif); font-size: 6mm; line-height: 1.55; letter-spacing: .06em; }
+  .pipe { display: flex; align-items: stretch; gap: 2.5mm; }
+  .pipe .step { flex: 1; background: rgba(244,230,200,.055); border: .25mm solid rgba(217,164,65,.28); border-radius: 1.6mm; padding: 3mm; display: flex; flex-direction: column; gap: 1.5mm; }
+  .pipe .step img { width: 100%; height: 30mm; object-fit: cover; border-radius: 1mm; }
+  .pipe .step b { font-size: 3.4mm; color: var(--gold); }
+  .pipe .step span { font-size: 2.85mm; line-height: 1.5; }
+  .pipe .arrow { align-self: center; color: var(--gold); font-size: 5mm; }
+  .cover { padding: 0; }
+  .cover .half { position: absolute; top: 0; bottom: 0; width: 50%; background-size: cover; background-position: center; }
+  .cover .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(13,7,6,.92) 0%, rgba(13,7,6,.25) 34%, rgba(13,7,6,0) 60%), linear-gradient(0deg, rgba(13,7,6,.85), rgba(13,7,6,0) 38%); }
+  .cover .txt { position: absolute; left: 16mm; top: 14mm; display: flex; gap: 6mm; }
+  .cover h1 { writing-mode: vertical-rl; font-size: 19mm; text-shadow: 0 0 8mm rgba(217,164,65,.5); }
+  .cover .sub { writing-mode: vertical-rl; font-family: var(--serif); font-size: 5mm; letter-spacing: .3em; color: var(--dim); margin-top: 2mm; }
+  .cover .foot { position: absolute; left: 16mm; right: 16mm; bottom: 10mm; display: flex; justify-content: space-between; align-items: flex-end; }
+  .cover .labels { position: absolute; top: 12mm; right: 16mm; left: 50%; display: flex; justify-content: space-between; font-family: var(--serif); font-size: 4.4mm; letter-spacing: .3em; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; flex: 1; min-height: 0; }
+  .grid3 figure img { height: 100%; }
+  .pair { display: grid; grid-template-columns: 1fr; gap: 2.5mm; }
+  .grid3 .pair img { height: 41mm; flex: none; }
+  .checks td:first-child { width: 47%; } .checks td, .checks th { padding: 1mm 2.2mm; font-size: 3mm; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<!-- 1 cover -->
+<section class="cover">
+  <div class="half" style="left:0;background-image:url(img/hero_candle.jpg)"></div>
+  <div class="half" style="left:50%;background-image:url(img/hero_shutter.jpg)"></div>
+  <div class="shade"></div>
+  <div class="labels"><span style="margin-left:-36mm;color:#ffc888">烛 光</span><span style="color:#eaf4ff">快 门</span></div>
+  <div class="txt"><h1>走马灯</h1><div class="sub">把一段 AI 动画，冻成一圈雕塑</div></div>
+  <div class="foot">
+    <div><p class="big">拖动转盘。打开快门。<br>雕塑没有动，是光让他跑了起来。</p></div>
+    <div style="text-align:right"><p class="dim">群核科技 Aholo 全球 3D AI 黑客松 · 项目报告</p><p class="dim">Zoetrope of Frozen Motion · 可运行网页 Demo + 实录视频 + 可打印模型</p></div>
+  </div>
+</section>
+
+<!-- 2 concept -->
+<section>
+  <h2>一、这是什么 <small>CONCEPT</small></h2>
+  <div class="row">
+    <div class="col" style="flex:1.05">
+      <div class="card"><p class="big">一盏可以亲手转动的 3D 走马灯：Aholo Lux3D 生成角色、骨骼与动作，网页把动作“冻”成一圈静止雕塑，转起来、打开快门，雕塑就活了。</p></div>
+      <div>
+        <h3>给谁</h3>
+        <p>对“动画是怎么动起来的”好奇的普通人；想把 AI 角色做成实体摆件的 3D 打印玩家；在浏览器里十秒就想看懂作品的评委与观众。</p>
+      </div>
+      <div>
+        <h3>标志性的一刻</h3>
+        <p>烛光下，二十多尊雕塑高速旋转，只剩一圈模糊的光带。按下空格打开快门：光带瞬间凝固成一个原地奔跑的孩子。转盘里没有任何东西在“播放动画”，每一尊都是静止的；动起来的只是观看的方式。</p>
+      </div>
+      <div>
+        <h3>为什么是走马灯</h3>
+        <p>走马灯是中国最古老的“动画装置”之一。Lux3D 把“文字 → 角色 → 骨骼 → 动作”的链路压缩到几分钟，正好让这件古老的玩具有了新的做法：动画的每一帧不再是画，而是一尊可以拿在手里、可以打印出来的雕塑。</p>
+      </div>
+    </div>
+    <div class="col">
+      <figure style="flex:1"><img src="img/f_signature.jpg" style="height:100%"><figcaption>快门打开：22 尊静止雕塑，同一个孩子的 22 个瞬间（实机截图，1920×1080）。</figcaption></figure>
+    </div>
+  </div>
+  <div class="pg">02</div>
+</section>
+
+<!-- 3 Lux3D role -->
+<section>
+  <h2>二、Aholo Lux3D 承担了什么 <small>作品里看得见的角色、宫灯、骨骼与动作，全部来自 Lux3D</small></h2>
+  <div class="pipe">
+    <div class="step"><img src="img/kid_concept.jpg"><b>1 文字 → 设定图</b><span>一句提示词，得到 A 字站姿的虎头帽娃娃。<br><code>multimodal-to-image · 6656052</code></span></div>
+    <div class="arrow">›</div>
+    <div class="step"><img src="img/mesh.jpg"><b>2 图 → 3D</b><span>G1 模型，43,894 面，PBR 贴图。<br><code>img-to-3d · 6656685</code></span></div>
+    <div class="arrow">›</div>
+    <div class="step"><img src="img/poses.jpg"><b>3 自动绑骨</b><span>52 根骨骼的人形骨架与蒙皮。<br><code>auto-rig · 6659006</code></span></div>
+    <div class="arrow">›</div>
+    <div class="step"><img src="img/clips.jpg"><b>4 动作重定向</b><span>奔、疾、行、舞、担、提灯、游、梦游 8 段循环。<br><code>retarget · 6659806</code></span></div>
+    <div class="arrow">›</div>
+    <div class="step"><img src="img/lantern_concept.jpg"><b>5 宫灯</b><span>中央宫灯：文字 → 图 → 3D，54,094 面。<br><code>6661057 → 6661658</code></span></div>
+    <div class="arrow">›</div>
+    <div class="step"><img src="img/print.jpg"><b>6 打印格式</b><span>多格式导出 STL / 3MF，网格水密。<br><code>multi-format-export · 6663902</code></span></div>
+  </div>
+  <div class="row" style="margin-top:5mm">
+    <div class="col" style="flex:1.25">
+      <table>
+        <tr><th>Lux3D 能力</th><th>产出</th><th class="n">任务 ID</th><th class="n">积分</th></tr>
+        <tr><td>多模态生图 ×2</td><td>角色设定图、宫灯设定图</td><td class="n">6656052 / 6661057</td><td class="n">24</td></tr>
+        <tr><td>图生 3D（G1）×2</td><td>角色网格、宫灯网格（含贴图）</td><td class="n">6656685 / 6661658</td><td class="n">40</td></tr>
+        <tr><td>数字人自动绑骨</td><td>52 骨骼 + 蒙皮权重</td><td class="n">6659006</td><td class="n">15</td></tr>
+        <tr><td>动画重定向</td><td>8 段原地循环动作（合并 GLB）</td><td class="n">6659806</td><td class="n">6</td></tr>
+        <tr><td>多格式导出</td><td>可打印 STL、3MF</td><td class="n">6663902</td><td class="n">1</td></tr>
+        <tr><td><b>合计</b></td><td>7 个任务，一次通过，无失败、无重复生成</td><td class="n"></td><td class="n"><b>86</b></td></tr>
+      </table>
+      <p class="dim" style="margin-top:2mm;font-size:2.9mm">积分取自 Lux3D 任务列表接口返回的 consumedCredits；全部请求与结果记录在 assets/lux3d/ledger.jsonl。</p>
+    </div>
+    <div class="col">
+      <div class="card">
+        <h3>我们自己的代码做了什么（如实说明）</h3>
+        <p>把 Lux3D 的动作按相位均匀采样成 N 个姿态，用 Lux3D 的骨骼在 CPU 上蒙皮，烘焙成 N 尊静态网格并排成一圈；转盘、立柱、灯光、模糊与快门模拟、界面由 three.js 代码绘制。没有任何一尊雕塑的造型来自手工建模。</p>
+      </div>
+    </div>
+  </div>
+  <div class="pg">03</div>
+</section>
+
+<!-- 4 how it works -->
+<section>
+  <h2>三、它是怎么动起来的 <small>HOW IT WORKS</small></h2>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <h3>① 冻结</h3>
+        <p>一段 0.93 秒的奔跑循环，按 24 Hz 采样成 22 个姿态。第 i 尊雕塑放在转盘的第 i 个格位上，摆的是倒数第 i 个姿态。</p>
+      </div>
+      <div class="card">
+        <h3>② 烛光 = 长曝光</h3>
+        <p>稳定光源下，眼睛在一帧时间里看到转盘扫过的所有位置。程序在每帧内对转角做多次抖动采样并做时间累积，雕塑就糊成一圈光带。</p>
+      </div>
+      <div class="card">
+        <h3>③ 快门 = 只在“对齐”的瞬间看一眼</h3>
+        <p>转盘每转过一个格位，快门开一次。每次看到的都是“下一尊雕塑站在同一个位置”，于是位置不动、姿态在变：动画出现了。转得越快播放越快，倒着转就倒放；让快门比转盘慢半拍（错拍），人物就绕着灯慢慢走。</p>
+      </div>
+      <p class="dim" style="font-size:2.9mm">快门是感知层面的模拟（采样保持），屏幕不会真的闪烁，避免了频闪不适。</p>
+    </div>
+    <div class="col">
+      <figure><img src="img/f_candle.jpg" style="height:58mm"><figcaption>烛光：同一个转盘，同一转速。</figcaption></figure>
+      <figure><img src="img/f_detune.jpg" style="height:58mm"><figcaption>快门 + 错拍滑杆：界面只有一个开关、一个滑杆和 8 个动作。</figcaption></figure>
+    </div>
+  </div>
+  <div class="pg">04</div>
+</section>
+
+<!-- 5 iterations -->
+<section>
+  <h2>四、过程与关键迭代 <small>均为开发过程中的实机截图</small></h2>
+  <div class="grid3">
+    <div class="col">
+      <h3>A · 第一次跑通 → 定稿</h3>
+      <div class="pair">
+        <figure><img src="img/it_a1.jpg"><figcaption><span class="tag before">之前</span>28 尊太挤；宫灯是代码画的占位体。</figcaption></figure>
+        <figure><img src="img/it_a2.jpg"><figcaption><span class="tag">之后</span>改为 24 Hz / 22 尊；宫灯换成 Lux3D 生成的模型。</figcaption></figure>
+      </div>
+      <p>核心想法在第一版就被验证：切换快门，光带确实变成了奔跑的人。之后的工作只围绕“看得更清楚”。</p>
+    </div>
+    <div class="col">
+      <h3>B · 游泳动作互相穿插</h3>
+      <div class="pair">
+        <figure><img src="img/it_b1.jpg"><figcaption><span class="tag before">之前</span>身体沿切线方向，首尾相叠。</figcaption></figure>
+        <figure><img src="img/it_b2.jpg"><figcaption><span class="tag">之后</span>改为朝向宫灯、悬空，像一朵花。</figcaption></figure>
+      </div>
+      <p>程序按每段动作的实际步幅自动决定雕塑大小与间距，不再靠手调。</p>
+    </div>
+    <div class="col">
+      <h3>C · “这一帧是一尊雕塑”</h3>
+      <div class="pair">
+        <figure><img src="img/it_c1.jpg"><figcaption><span class="tag before">之前</span>只是把镜头推近，主体淹没在人群里。</figcaption></figure>
+        <figure><img src="img/it_c2.jpg"><figcaption><span class="tag">之后</span>把它从转盘上“拿起来”，身后的转盘继续转。</figcaption></figure>
+      </div>
+      <p>被拿起的那一帧在转盘上留下一个缺口，动画会随之闪一下：它确实只是 22 尊里的一尊。</p>
+    </div>
+  </div>
+  <div class="pg">05</div>
+</section>
+
+<!-- 6 final -->
+<section>
+  <h2>五、最终成果 <small>以下画面全部截取自提交的实录视频（1920×1080，60 fps，逐帧录制自运行中的网页）</small></h2>
+  <div class="grid3" style="grid-template-rows:1fr 1fr">
+    <figure><img src="img/v1.jpg"><figcaption>0:05　烛光下的光带</figcaption></figure>
+    <figure><img src="img/v2.jpg"><figcaption>0:14　快门打开</figcaption></figure>
+    <figure><img src="img/v3.jpg"><figcaption>0:36　转得越快，跑得越快</figcaption></figure>
+    <figure><img src="img/v4.jpg"><figcaption>0:50　拿起一帧：可下载 STL</figcaption></figure>
+    <figure><img src="img/v5.jpg"><figcaption>1:01　换一段动作：游</figcaption></figure>
+    <figure><img src="img/v6.jpg"><figcaption>1:09　幕后面板：Lux3D 任务链</figcaption></figure>
+  </div>
+  <div class="pg">06</div>
+</section>
+
+<!-- 7 print + validation -->
+<section style="padding-top:10mm">
+  <h2 style="margin-bottom:3mm">六、从屏幕到桌面，以及我们验证了什么 <small>PRINT &amp; CHECKS</small></h2>
+  <div class="row">
+    <div class="col">
+      <figure><img src="img/print.jpg" style="height:40mm"><figcaption>被拿起的一帧。面板里的按钮导出这一尊（高 80 mm）或整圈（直径 180 mm）的 STL。</figcaption></figure>
+      <div class="card">
+        <h3>可打印文件（deliverables/print/）</h3>
+        <ul>
+          <li>Lux3D 多格式导出的角色原型：STL + 3MF</li>
+          <li>奔跑循环的 22 尊分帧 STL（每尊 80 mm）</li>
+          <li>整圈走马灯 STL（带底盘，直径 180 mm）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <table class="checks">
+        <tr><th>检查项</th><th>结果</th></tr>
+        <tr><td>切换快门：模糊 ⇄ 动画</td><td>通过（实机截图与视频）</td></tr>
+        <tr><td>拖动加速 / 反转 → 变速 / 倒放</td><td>通过</td></tr>
+        <tr><td>8 段动作切换、拿起任意一帧</td><td>通过</td></tr>
+        <tr><td>从共享目录最终位置启动 Demo</td><td>通过：全程由共享目录 source/web 启动</td></tr>
+        <tr><td>Lux3D 原型 STL 水密性</td><td>通过：43,898 面，65,847 条边全部成对</td></tr>
+        <tr><td>分帧 STL 水密性</td><td>通过：22 个文件的边全部成对（未检测自相交）</td></tr>
+        <tr><td>视频规格</td><td>1920×1080，60 fps，78 秒，H.264；逐帧录制，无放大、无插帧</td></tr>
+      </table>
+      <div class="card">
+        <h3>如实说明的局限</h3>
+        <ul>
+          <li>尚未实际打印实物；带姿态的模型打印时可能需要支撑。</li>
+          <li>公开 Demo 不在线调用 Lux3D（密钥不能放进前端），展示的是经 API 生成好的资产；真实显示器上的帧率未单独测量。</li>
+          <li>快门为感知模拟而非真实频闪；视频无配乐；动作为 Lux3D 预置的人形动作。</li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="pg">07</div>
+</section>
+
+</body>
+</html>

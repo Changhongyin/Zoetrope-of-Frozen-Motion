@@ -1,0 +1,18 @@
+{
+  "model": "kid_anim.glb",
+  "lantern": "lantern.glb",
+  "start": "Jog_Fwd_Loop",
+  "rename": {
+    "animation_1": "Jog_Fwd_Loop", "animation_2": "Sprint_Loop", "animation_3": "Walk_Loop", "animation_4": "Dance_Loop",
+    "animation_5": "Walk_Carry_Loop", "animation_6": "Idle_Lantern_Loop", "animation_7": "Swim_Fwd_Loop", "animation_8": "Zombie_Walk_Fwd_Loop"
+  },
+  "options": { "Swim_Fwd_Loop": { "lift": 0.5, "face": "in" } },
+  "clips": ["Jog_Fwd_Loop", "Sprint_Loop", "Walk_Loop", "Dance_Loop", "Walk_Carry_Loop", "Idle_Lantern_Loop", "Swim_Fwd_Loop", "Zombie_Walk_Fwd_Loop"],
+  "pipeline": [
+    { "title": "1 · 文字 → 设定图", "text": "一句提示词生成虎头帽娃娃的 A 字站姿设定图。", "task": "Lux3D multimodal-to-image · task 6656052", "image": "kid_concept.jpg" },
+    { "title": "2 · 图 → 3D 模型", "text": "G1 图生 3D：43,894 个三角面，带 PBR 贴图。", "task": "Lux3D img-to-3d (G1) · task 6656685" },
+    { "title": "3 · 自动绑骨", "text": "为模型生成 52 根骨骼的人形骨架与蒙皮权重。", "task": "Lux3D humanoid auto-rig · task 6659006" },
+    { "title": "4 · 动作重定向", "text": "8 段循环动作（奔、疾、行、舞、担、提灯、游、梦游）重定向到角色上。", "task": "Lux3D animation retarget · task 6659806" },
+    { "title": "5 · 宫灯", "text": "中央的六角宫灯同样由 Lux3D 生成：文字 → 设定图 → 3D。", "task": "Lux3D multimodal-to-image 6661057 → img-to-3d (G1) 6661658", "image": "lantern_concept.jpg" }
+  ]
+}

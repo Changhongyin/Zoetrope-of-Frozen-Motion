@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>走马灯 · Zoetrope of Frozen Motion</title>
+<link rel="stylesheet" href="./style.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.min.js", "three/addons/": "./vendor/jsm/" } }
+</script>
+</head>
+<body>
+<canvas id="stage"></canvas>
+
+<div id="loading"><div class="seal">走马灯</div><div id="loadmsg">点灯中…</div></div>
+
+<header id="title">
+  <h1>走马灯</h1>
+  <p class="sub">把一段 AI 动画，冻成一圈雕塑</p>
+</header>
+
+<div id="hint">拖动转盘 · 按住 <kbd>空格</kbd> 打开快门</div>
+
+<div id="caption"></div>
+
+<aside id="stats">
+  <div><b id="s-rev">0.00</b><span>转 / 秒</span></div>
+  <div><b id="s-hz">0</b><span>快门 Hz</span></div>
+  <div><b id="s-n">0</b><span>尊雕塑</span></div>
+</aside>
+
+<nav id="clips"></nav>
+
+<footer id="bar">
+  <button id="mode" aria-pressed="false">
+    <span class="opt candle">烛光</span><span class="knob"></span><span class="opt strobe">快门</span>
+  </button>
+  <label id="detune-wrap" title="让快门比转盘快一点或慢一点">
+    <span>错拍</span>
+    <input id="detune" type="range" min="-3" max="3" step="0.05" value="0">
+  </label>
+  <button id="backstage-btn" class="ghost">幕后 · Lux3D</button>
+</footer>
+
+<section id="inspect" hidden>
+  <button id="inspect-close" aria-label="关闭">×</button>
+  <h2>第 <span id="i-idx">1</span> / <span id="i-n">1</span> 帧</h2>
+  <p>它不会动。它只是整段动作里的一个瞬间，被冻成了一尊可以拿在手里的雕塑。</p>
+  <div class="row">
+    <button id="stl-one">下载这一尊 STL</button>
+    <button id="stl-ring" class="ghost">下载整圈 STL</button>
+  </div>
+  <p class="fine" id="stl-note">高 80 mm · 单位毫米</p>
+</section>
+
+<section id="backstage" hidden>
+  <button id="backstage-close" aria-label="关闭">×</button>
+  <h2>幕后：Aholo Lux3D 做了什么</h2>
+  <ol id="pipeline"></ol>
+  <p class="fine">本页只做一件事：把 Lux3D 的动画按相位采样成 N 个静止姿态，摆成一圈。转盘、灯与快门由代码绘制。</p>
+</section>
+
+<script type="module" src="./main.js"></script>
+</body>
+</html>

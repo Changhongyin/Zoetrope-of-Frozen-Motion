@@ -1,0 +1,55 @@
+{
+ "img3d": 6656685,
+ "img3d_files": [
+  [
+   "kid_img3d_t6656685_0.zip",
+   9551153
+  ],
+  [
+   "kid_img3d_t6656685_1.glb",
+   9894612
+  ]
+ ],
+ "rig": 6659006,
+ "rig_files": [
+  [
+   "kid_rig_t6659006_0.glb",
+   18036252
+  ]
+ ],
+ "retarget": 6659806,
+ "retarget_files": [
+  [
+   "kid_retarget_t6659806_0_Jog_Fwd_Loop.glb",
+   18562072
+  ],
+  [
+   "kid_retarget_t6659806_1_Sprint_Loop.glb",
+   18562072
+  ],
+  [
+   "kid_retarget_t6659806_2_Walk_Loop.glb",
+   18562072
+  ],
+  [
+   "kid_retarget_t6659806_3_Dance_Loop.glb",
+   18562072
+  ],
+  [
+   "kid_retarget_t6659806_4_Walk_Carry_Loop.glb",
+   18562072
+  ],
+  [
+   "kid_retarget_t6659806_5_Idle_Lantern_Loop.glb",
+   18562072
+  ],
+  [
+   "kid_retarget_t6659806_6_Swim_Fwd_Loop.glb",
+   18562072
+  ],
+  [
+   "kid_retarget_t6659806_7_Zombie_Walk_Fwd_Loop.glb",
+   18562072
+  ]
+ ]
+}
